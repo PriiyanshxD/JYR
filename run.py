@@ -5,7 +5,7 @@ import sys
 import importlib
 import traceback
 
-MODULE_NAMES = ["jyr", "jyr"]  # compiled module or local module
+MODULE_NAMES = ["jyr", "jyr"]
 
 def try_import_module(names):
     for modname in names:
@@ -24,7 +24,7 @@ def main():
         print("[ERROR] No module found (Jyr/jyr). Exiting...")
         sys.exit(1)
 
-    # Step 2: Call aprov() first
+    
     if hasattr(mod, "aprov"):
         try:
             mod.aprov()
@@ -40,4 +40,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
