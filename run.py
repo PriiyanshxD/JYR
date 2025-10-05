@@ -5,7 +5,7 @@ import sys
 import importlib
 import traceback
 
-MODULE_NAMES = ["Jyr", "jyr"]  # compiled module or local module
+MODULE_NAMES = ["jyr", "jyr"]  # compiled module or local module
 
 def try_import_module(names):
     for modname in names:
@@ -40,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
