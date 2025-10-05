@@ -18,7 +18,7 @@ def try_import_module(names):
     return None
 
 def main():
-    # Step 1: Import compiled or local module
+    
     mod = try_import_module(MODULE_NAMES)
     if not mod:
         print("[ERROR] No module found (Jyr/jyr). Exiting...")
@@ -40,5 +40,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
