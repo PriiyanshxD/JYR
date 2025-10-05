@@ -1,12 +1,42 @@
-try:
-    import Jyr  
-except ImportError as e:
-    print("[ERROR] Compiled module nahi mila:", e)
-    raise SystemExit
+#!/usr/bin/env python3
+# run.py
 
-# Ye function ka naam wahi hona chahiye jo tu ne .pyx/.py me entry point banaya tha
-try:
-    aprov()  # start() ko apne main code me define kiya hona chahiye
-except AttributeError:
-    print("[ERROR] main.start() function nahi mila. Apna main module check karo.")
+import sys
+import importlib
+import traceback
 
+MODULE_NAMES = ["Jyr", "jyr"]  # compiled module or local module
+
+def try_import_module(names):
+    for modname in names:
+        try:
+            mod = importlib.import_module(modname)
+            print(f"[INFO] Imported module '{modname}'")
+            return mod
+        except Exception as e:
+            print(f"[INFO] Could not import '{modname}': {e}")
+    return None
+
+def main():
+    # Step 1: Import compiled or local module
+    mod = try_import_module(MODULE_NAMES)
+    if not mod:
+        print("[ERROR] No module found (Jyr/jyr). Exiting...")
+        sys.exit(1)
+
+    # Step 2: Call aprov() first
+    if hasattr(mod, "aprov"):
+        try:
+            mod.aprov()
+        except SystemExit:
+            sys.exit(1)
+        except Exception as e:
+            print(f"[ERROR] Exception in 'aprov()': {e}")
+            traceback.print_exc()
+            sys.exit(2)
+    else:
+        print("[ERROR] 'aprov()' not found in module. Exiting...")
+        sys.exit(3)
+
+if __name__ == "__main__":
+    main()
